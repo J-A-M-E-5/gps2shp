@@ -48,48 +48,66 @@ except ImportError:
 # Can tweak these variables to change how maps are displayed
 LINE_COLOR = 'ff0000ff'     # R G B Opacity
 LINE_WIDTH = '1.5'
+POLY_COLOR = '7d0000ff'
+POLY_FILL = '1'
+POLY_OUTLINE = '1'
 
 VALID_CHARS = list('0123456789.+-')
 
 __version__ = '.'.join(str(_) for _ in __version_num__)
 
 # A bit messy but gets the job done without needing KML libs
-KML_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
+KML_TEMPLATE="""<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>%s</name>
-    <Style id="line-%s-1000-normal">
+    <description/>
+    <Style id="poly-%s-1000-125-normal">
       <LineStyle>
         <color>%s</color>
         <width>%s</width>
       </LineStyle>
+      <PolyStyle>
+        <color>%s</color>
+        <fill>%s</fill>
+        <outline>%s</outline>
+      </PolyStyle>
     </Style>
-    <Style id="line-%s-1000-highlight">
+    <Style id="poly-%s-1000-125-highlight">
       <LineStyle>
         <color>%s</color>
         <width>%s</width>
       </LineStyle>
+      <PolyStyle>
+        <color>%s</color>
+        <fill>%s</fill>
+        <outline>%s</outline>
+      </PolyStyle>
     </Style>
-    <StyleMap id="line-%s-1000">
+    <StyleMap id="poly-%s-1000-125">
       <Pair>
         <key>normal</key>
-        <styleUrl>#line-%s-1000-normal</styleUrl>
+        <styleUrl>#poly-%s-1000-125-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#line-%s-1000-highlight</styleUrl>
+        <styleUrl>#poly-%s-1000-125-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Folder>
       <name>%s</name>
       <Placemark>
         <name>%s</name>
-        <styleUrl>#line-%s-1000</styleUrl>
-        <LineString>
-          <tessellate>1</tessellate>
-          <coordinates>
-%s          </coordinates>
-        </LineString>
+        <styleUrl>#poly-%s-1000-125</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <tessellate>1</tessellate>
+              <coordinates>
+%s              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
       </Placemark>
     </Folder>
   </Document>
@@ -154,9 +172,15 @@ def create_kml(filepath):
                           style_color,
                           LINE_COLOR,
                           LINE_WIDTH,
+                          POLY_COLOR,
+                          POLY_FILL,
+                          POLY_OUTLINE,
                           style_color,
                           LINE_COLOR,
                           LINE_WIDTH,
+                          POLY_COLOR,
+                          POLY_FILL,
+                          POLY_OUTLINE,
                           style_color,
                           style_color,
                           style_color,
