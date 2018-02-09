@@ -10,14 +10,14 @@ end up with half-converted datasets.
 
 Compatability: Linux, OSX, Windows (use --exe-path). Python 2.7, Python 3.x
 Author       : James Martin
-Version      : 0.1 (2018-02-09)
+Version      : 0.2 (2018-02-09)
 License      : Public Domain
 
 Thanks to Joshua Anderson for financing the creation of this program.
 """
 
 from __future__ import print_function
-__version_num__ = (0, 1)
+__version_num__ = (0, 2)
 
 import argparse
 import os
@@ -273,7 +273,7 @@ def call_ogr2ogr(exe, shp_file, kml_file):
     err_list = err.decode().strip().split('\n')
     errors = 0
     for _ in err_list:
-        if 'Normalized/laundered field name:' in _:     # Ignore this warning
+        if _[:8] == 'Warning ':     # Ignore warnings
             continue
         else:
             errors += 1
