@@ -32,7 +32,7 @@ the ogr2ogr exe (untested).
 `cd gps2shp && sudo ln -s "$(pwd)/gps2shp.py" /usr/local/bin/gps2shp`
 
 ## How to use
-`gps2shp.py --help`
+`./gps2shp.py --help`
 
 ## Code Standards
 * pep8 / pycodestyle / flake8 - 100%
