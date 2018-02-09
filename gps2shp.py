@@ -334,12 +334,11 @@ def main():
             print('\t%s\t->\t%s,dbf,prj,shx' % (file_, shp_file), end='\t')
 
             call_ogr2ogr(exe, shp_file, kml_file)
+            print('OK!')
 
         if args.no_kml:
             # Delete our temp kml file
             os.remove(kml_file)
-
-            print('OK!')
 
 
 if __name__ == '__main__':
